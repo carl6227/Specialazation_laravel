@@ -16,7 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::group(['middleware'=>['auth']],function(){
+    Route::get('/p/create','App\Http\Controllers\PostsController@create')->name('posts');
+    Route::post('/p','App\Http\Controllers\PostsController@store');
+    
+ });
+
 Route::group(['middleware'=>['auth']],function(){
    Route::get('/dashboard','App\Http\Controllers\DashboardController@index')->name('dashboard');
 });
+
 require __DIR__.'/auth.php';
