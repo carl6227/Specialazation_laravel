@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,13 +20,18 @@ Route::get('/', function () {
 
 
 Route::group(['middleware'=>['auth']],function(){
-    Route::get('/p/create','App\Http\Controllers\PostsController@create')->name('posts');
     Route::post('/p','App\Http\Controllers\PostsController@store');
-    
+    Route::get('/p/create','App\Http\Controllers\PostsController@create')->name('posts');
+    Route::get('/p/{post}','App\Http\Controllers\PostsController@show');
  });
 
 Route::group(['middleware'=>['auth']],function(){
    Route::get('/dashboard','App\Http\Controllers\DashboardController@index')->name('dashboard');
+   Route::post('/dashboard/searchusers','App\Http\Controllers\DashboardController@searchusers')->name('searchusers');
+   Route::get('/dashboard/{user}/edit','App\Http\Controllers\DashboardController@edit')->name('dashboard.edit');
+   Route::patch('/dashboard/{user}','App\Http\Controllers\DashboardController@update')->name('dashboard.update');
 });
-
+Route::group(['middleware'=>['auth']],function(){
+    Route::get('/profile/{user}','App\Http\Controllers\ProfileController@show')->name('profile.show');
+ });
 require __DIR__.'/auth.php';

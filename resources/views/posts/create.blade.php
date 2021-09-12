@@ -2,13 +2,33 @@
 <x-app-layout>
 
     <div class="col-sm">
-   <form action="/p" method="post" >
+   <form action="/p" method="post" enctype='multipart/form-data'>
    @csrf
             <div class="col-8 offset-2" >   
 
           <div class="row">
               <h1>Add New Post</h1>
           </div>
+          <div class="form-group row">
+             <label for="title"> Post Caption</label>
+              <input
+               type="text"
+               id="title"
+               class="form-control @error('title-') is-invalid @enderror"
+               name="title"
+               value="{{ old('title')}}"
+               autocomplete="title"
+               autofocus
+               >
+            
+          </div>
+          @error('title')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{$message}}</strong>
+            </span>
+               @enderror
+
+
           <div class="form-group row">
              <label for="caption"> Post Caption</label>
               <input

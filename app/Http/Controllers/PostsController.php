@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\facades\Image;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Post;
+ 
 class PostsController extends Controller
 {
 
@@ -18,28 +22,33 @@ class PostsController extends Controller
 
 
         $data=request()->validate([
+            'title'=>'required',
             'caption'=>'required',
-            'image'=>['required','image']
+            'image'=>'required|image',
         ]);
-
+      
         $ImagePath=request('image')->store('uploads','public');
+        
+        $image=Image::make(public_path("storage/{$ImagePath}"))->fit(1500,1500);
+        $image->save();          
+
 
         Auth::user()->posts()->create([
+            'title'=>$data['title'],
             'caption'=>$data['caption'],
-            'image'=>$ImagePath
+            'image'=>$ImagePath,
+            'isApproved'=>'false'
 
         ]);
-        if(Auth::user()->hasRole('user')){
-            return view('userdash');
        
-          }elseif(Auth::user()->hasRole('blogwriter')){
-          
-           return view('blogwriterdash');
-          }elseif(Auth::user()->hasRole('admin')){
-            return view('dashboard');
-      
-          }
+            return redirect('/dashboard');
+       
 
 
+    }
+
+    public function show (Post $post)
+    {
+       return view('posts/show',compact('post'));
     }
 }

@@ -20,11 +20,7 @@ return [
         'blogwriter' => [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
-        ],
-        'user' => [
-            'profile' => 'r,u',
         ]
-        
     ],
 
     'permissions_map' => [
