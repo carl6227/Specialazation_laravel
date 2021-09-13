@@ -32,9 +32,18 @@
                     </div>
 
 
-                    <div class="container border border-secondary" style="height:150px"></div>
-                    <form action="p/comments/{{Auth::user()->id}}" method="get">
+                    <div class="container border border-secondary" style=" overflow:scroll;height:150px">
+                
+                  @foreach($post->comments as $comment)
+                  <div class="d-flex bg-white mt-2 height: p-3">
+                      <p>{{$comment->user->username}}</p>
+               
+                   <p class="ml-3">{{$comment->comment}}</p>
+                   </div>
+                  @endforeach
 
+                   </div>
+                    <form action="{{route('comment.store',$post->id)}}" method="post">
                         @csrf
                         <div class="input-group mb-3">
 
@@ -49,7 +58,7 @@
                             @enderror
 
                             <div class="input-group-append">
-                                <button type="submit" href="" class="btn btn-primary text-light">submit</a>
+                                <button type="submit" class="btn btn-primary text-light">submit</a>
 
                             </div>
                             </div>

@@ -10,15 +10,13 @@ use App\Models\Post;
 use Intervention\Image\facades\Image;
 class DashboardController extends Controller
 {
-   
 
   public function index()
   {
    
 
     if(Auth::user()->hasRole('blogwriter')){
-      $userID=Auth::user()->id;
-      $writerUser=2;
+    
       $posts = DB::table('posts');
       $blogwriters = DB::table('users')->where([['username','!=','Admin'],['id','!=',Auth::user()->id]])->get();
       

@@ -36,6 +36,6 @@ Route::group(['middleware'=>['auth']],function(){
  });
 
  Route::group(['middleware'=>['auth']],function(){
-    Route::get('/p/comments/{comments}','App\Http\Controllers\CommentController@create');
+    Route::post('/comments/{post}','App\Http\Controllers\CommentController@store')->name('comment.store');
  });
 require __DIR__.'/auth.php';
