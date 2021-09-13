@@ -34,4 +34,8 @@ Route::group(['middleware'=>['auth']],function(){
 Route::group(['middleware'=>['auth']],function(){
     Route::get('/profile/{user}','App\Http\Controllers\ProfileController@show')->name('profile.show');
  });
+
+ Route::group(['middleware'=>['auth']],function(){
+    Route::get('/p/comments/{comments}','App\Http\Controllers\CommentController@create');
+ });
 require __DIR__.'/auth.php';

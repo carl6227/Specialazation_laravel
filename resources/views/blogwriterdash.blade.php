@@ -160,7 +160,7 @@
                 var filterData = ''
                 $('.dynamic-container').html('');
                 $.each(res, function(index, value) {
-                    filterData = ' <a href="/profile/{{$blogwriter->id}}"><h5>' + value
+                    filterData = ' <a href="/profile/{{$blogwriter->id}"><h5>' + value
                         .username + '</h5></a>'
                     $('.dynamic-container').append(filterData);
                 });
