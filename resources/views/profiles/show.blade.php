@@ -11,8 +11,8 @@
                     <div class="col-sm-8">
                         <div class="d-flex justify-content-between align-items-baseline">
                             <div class="d-flex align-items-center pb-4">
-                                <h1>{{$user->username}}</h1>
-                                <a href="3" class="btn btn-primary ml-3">Follow</a>
+                                <h1 class="text-xl ">{{$user->username}}</h1>
+                                <a href="#" class="btn btn-primary ml-3">Follow</a>
                             </div>
                           
                         </div>
