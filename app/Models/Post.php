@@ -16,4 +16,10 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function comments()
+    {
+
+        return $this->hasmany(Comments::class)->orderBy('created_at','DESC');
+    }
 }
