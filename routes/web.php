@@ -22,7 +22,9 @@ Route::get('/', function () {
 Route::group(['middleware'=>['auth']],function(){
     Route::post('/p','App\Http\Controllers\PostsController@store');
     Route::get('/p/create','App\Http\Controllers\PostsController@create')->name('posts');
+    Route::get('/p/edit/{post}','App\Http\Controllers\PostsController@edit');
     Route::get('/p/{post}','App\Http\Controllers\PostsController@show');
+    Route::delete('/p/delete/{id}','App\Http\Controllers\PostsController@destroy')->name('post.destroy');
  });
 
 Route::group(['middleware'=>['auth']],function(){

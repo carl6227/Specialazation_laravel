@@ -10,7 +10,7 @@
               <h1>Add New Post</h1>
           </div>
           <div class="form-group row">
-             <label for="title"> Post Caption</label>
+             <label for="title"> Post Title</label>
               <input
                type="text"
                id="title"
@@ -31,16 +31,16 @@
 
           <div class="form-group row">
              <label for="caption"> Post Caption</label>
-              <input
+              <textarea
                type="text"
                id="caption"
                class="form-control @error('caption') is-invalid @enderror"
                name="caption"
-               value="{{ old('caption')}}"
                autocomplete="caption"
                autofocus
                >
-            
+               {{ old('caption')}}
+              </textarea>
           </div>
           @error('caption')
             <span class="invalid-feedback" role="alert">

@@ -17,19 +17,27 @@ class DashboardController extends Controller
 
     if(Auth::user()->hasRole('blogwriter')){
     
-      $posts = DB::table('posts');
+      $PendingPost = DB::table('posts')->where('isApproved','false')->get();
+      $ApprovedPost = DB::table('posts')->where('isApproved','true')->get();
       $blogwriters = DB::table('users')->where([['username','!=','Admin'],['id','!=',Auth::user()->id]])->get();
       
-   ;
-      return view('blogwriterdash',['posts'=>$posts,'blogwriters'=>$blogwriters]);
+   
+      return view('blogwriterdash',['approvedPosts'=>$ApprovedPost,'pendingPosts'=>$PendingPost,'blogwriters'=>$blogwriters]);
+     
      
     }elseif(Auth::user()->hasRole('admin')){
-      return view('dashboard');
-
+      $PendingPost = DB::table('posts')->where('isApproved','false')->get();
+      $ApprovedPost = DB::table('posts')->where('isApproved','true')->get();
+      $BlogWriters = DB::table('users')->where('username','!=','Admin')->get();
+      return view('dashboard',['blogwriters'=>$BlogWriters,'pendingPost'=>$PendingPost,'approvedPost'=>$ApprovedPost]);
     }
-    
-    
+    else
+    {
+      return view('auth/login');
+    }
   }
+    
+  
 
   public function edit(User $user)
   {

@@ -53,4 +53,16 @@ class PostsController extends Controller
        return view('posts/show',compact('post'));
       
     }
+    public function edit(Post $post){
+       
+    $post->update(['isApproved'=>'true']);
+     
+    return redirect('/dashboard');
+    }
+
+    public function destroy($id){
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect('/dashboard');
+        }
 }

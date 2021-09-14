@@ -12,7 +12,7 @@
                         <div class="d-flex justify-content-between align-items-baseline">
                             <div class="d-flex align-items-center pb-4">
                                 <h1 class="text-xl ">{{$user->username}}</h1>
-                                <a href="#" class="btn btn-primary ml-3">Follow</a>
+                               <follow-button></follow-button>
                             </div>
                           
                         </div>
