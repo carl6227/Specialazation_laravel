@@ -17,8 +17,13 @@
                             <h5 class="mt-3 ml-2 float-left">{{$post->user->username}}</h5>
                         </div>
                         <div class="col-sm-4">
+                        <form method="POST" action="{{ route('post.destroy', [$post->id]) }}">
                         <button class="btn btn-info">edit</button>
-                            <button class="btn btn-danger ">delete</button>
+                      
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                            </form>
                            
                         </div>
                     </div>

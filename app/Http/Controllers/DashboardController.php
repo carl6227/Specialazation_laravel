@@ -16,9 +16,9 @@ class DashboardController extends Controller
    
 
     if(Auth::user()->hasRole('blogwriter')){
-    
-      $PendingPost = DB::table('posts')->where('isApproved','false')->get();
-      $ApprovedPost = DB::table('posts')->where('isApproved','true')->get();
+      $userID=Auth::user()->id;
+      $PendingPost = DB::table('posts')->where([['isApproved','false'],['user_id',"$userID"]])->get();
+      $ApprovedPost = DB::table('posts')->where([['isApproved','true'],['user_id',"$userID"]])->get();
       $blogwriters = DB::table('users')->where([['username','!=','Admin'],['id','!=',Auth::user()->id]])->get();
       
    
@@ -36,14 +36,18 @@ class DashboardController extends Controller
       return view('auth/login');
     }
   }
-    
+  public function destroy($id){
+    $user = User::findOrFail($id);
+    $user->delete();
+    return redirect('/dashboard');
+    }
   
 
   public function edit(User $user)
   {
    return view('profiles.edit',compact('user')); 
   }
-
+  
   public function update(User $user)
   {
    $data = request()->validate([
@@ -72,6 +76,7 @@ class DashboardController extends Controller
   return redirect("/dashboard");
 
   }
+
   public function searchusers(Request $request)
   {
    ;
