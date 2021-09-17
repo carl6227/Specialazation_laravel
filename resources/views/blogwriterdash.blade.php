@@ -109,7 +109,11 @@
 
 
                                 @endforeach
-
+                                 <div class="row">
+                                     <div class="col-sm-12 d-flex justify-content-center" >
+                                         {{$approvedPosts}}
+                                     </div>
+                                 </div>
                             </div>
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                                 @foreach($pendingPosts as $post)
@@ -162,6 +166,11 @@
 
 
                                 @endforeach
+                                <div class="row">
+                                    <div class="col-sm-12 d-flex justify-content-center" >
+                                        {{$pendingPosts}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

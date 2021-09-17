@@ -12,7 +12,15 @@
                         <div class="d-flex justify-content-between align-items-baseline">
                             <div class="d-flex align-items-center pb-4">
                                 <h1 class="text-xl ">{{$user->username}}</h1>
-                               <follow-button></follow-button>
+                                <button class="btn btn-info follow"  data-id="{{ $user->id }}">
+                                    <strong>
+                                          @if($user->isFollowing($user))
+                                              UnFollow
+                                          @else
+                                              Follow
+                                          @endif
+                                        </strong>
+                                      </button>
                             </div>
                           
                         </div>

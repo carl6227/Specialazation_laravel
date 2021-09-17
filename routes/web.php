@@ -23,6 +23,8 @@ Route::group(['middleware'=>['auth']],function(){
    Route::post('/p','App\Http\Controllers\PostsController@store');
    Route::get('/p/create','App\Http\Controllers\PostsController@create')->name('posts');
    Route::get('/p/edit/{post}','App\Http\Controllers\PostsController@edit');
+   Route::get('/p/{post}/edit','App\Http\Controllers\PostsController@editinfo');
+   Route::patch('/p/update/{post}','App\Http\Controllers\PostsController@update')->name('post.update');
    
    Route::get('/p/{post}','App\Http\Controllers\PostsController@show');
    Route::delete('/p/delete/{id}','App\Http\Controllers\PostsController@destroy')->name('post.destroy');

@@ -18,13 +18,12 @@
                         </div>
                         <div class="col-sm-4">
                         <form method="POST" action="{{ route('post.destroy', [$post->id]) }}">
-                        <button class="btn btn-info">edit</button>
-                      
+                            <a class="btn btn-info" href="/p/{{$post->id}}/edit">edit</a>
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
                                                 <button class="btn btn-danger" type="submit">Delete</button>
                                             </form>
-                           
+                                            
                         </div>
                     </div>
                          <hr class="mt-2">

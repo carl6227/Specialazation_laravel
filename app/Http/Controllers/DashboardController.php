@@ -17,8 +17,8 @@ class DashboardController extends Controller
 
     if(Auth::user()->hasRole('blogwriter')){
       $userID=Auth::user()->id;
-      $PendingPost = DB::table('posts')->where([['isApproved','false'],['user_id',"$userID"]])->get();
-      $ApprovedPost = DB::table('posts')->where([['isApproved','true'],['user_id',"$userID"]])->get();
+      $PendingPost = DB::table('posts')->where([['isApproved','false'],['user_id',"$userID"]])->paginate(2);
+      $ApprovedPost = DB::table('posts')->where([['isApproved','true'],['user_id',"$userID"]])->paginate(2);
       $blogwriters = DB::table('users')->where([['username','!=','Admin'],['id','!=',Auth::user()->id]])->get();
       
    
