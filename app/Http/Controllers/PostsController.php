@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
- 
+use DB;
 class PostsController extends Controller
 {
-
+  
+    
 
     public function create()
     {
@@ -50,5 +51,18 @@ class PostsController extends Controller
     public function show (Post $post)
     {
        return view('posts/show',compact('post'));
+      
     }
+    public function edit(Post $post){
+       
+    $post->update(['isApproved'=>'true']);
+     
+    return redirect('/dashboard');
+    }
+
+    public function destroy($id){
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect('/dashboard');
+        }
 }

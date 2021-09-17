@@ -10,7 +10,6 @@ use App\Models\Post;
 use Intervention\Image\facades\Image;
 class DashboardController extends Controller
 {
-   
 
   public function index()
   {
@@ -18,16 +17,23 @@ class DashboardController extends Controller
 
     if(Auth::user()->hasRole('blogwriter')){
       $userID=Auth::user()->id;
-      $writerUser=2;
-      $posts = DB::table('posts');
+      $PendingPost = DB::table('posts')->where([['isApproved','false'],['user_id',"$userID"]])->paginate(2);
+      $ApprovedPost = DB::table('posts')->where([['isApproved','true'],['user_id',"$userID"]])->paginate(2);
       $blogwriters = DB::table('users')->where([['username','!=','Admin'],['id','!=',Auth::user()->id]])->get();
       
-   ;
-      return view('blogwriterdash',['posts'=>$posts,'blogwriters'=>$blogwriters]);
+   
+      return view('blogwriterdash',['approvedPosts'=>$ApprovedPost,'pendingPosts'=>$PendingPost,'blogwriters'=>$blogwriters]);
+     
      
     }elseif(Auth::user()->hasRole('admin')){
-      return view('dashboard');
-
+      $PendingPost = DB::table('posts')->where('isApproved','false')->get();
+      $ApprovedPost = DB::table('posts')->where('isApproved','true')->get();
+      $BlogWriters = DB::table('users')->where('username','!=','Admin')->get();
+      return view('dashboard',['blogwriters'=>$BlogWriters,'pendingPost'=>$PendingPost,'approvedPost'=>$ApprovedPost]);
+    }
+    else
+    {
+      return view('auth/login');
     }
 
     
@@ -35,13 +41,19 @@ class DashboardController extends Controller
     
     
   }
+  public function destroy($id){
+    $user = User::findOrFail($id);
+    $user->delete();
+    return redirect('/dashboard');
+    }
+  
 
 
   public function edit(User $user)
   {
    return view('profiles.edit',compact('user')); 
   }
-
+  
   public function update(User $user)
   {
    $data = request()->validate([
@@ -70,6 +82,7 @@ class DashboardController extends Controller
   return redirect("/dashboard");
 
   }
+
   public function searchusers(Request $request)
   {
    ;
