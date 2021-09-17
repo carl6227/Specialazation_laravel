@@ -12,7 +12,7 @@
                 <div class="col-sm-7">
                     <div class="d-flex">
                         <img class="w-10 rounded-circle" src="{{$post->user->profile->profileImage()}}" alt="image ">
-                        <h5 class="mt-3 ml-2">{{$post->user->username}}</h5>
+                        <a href="/dashboard"><h5 class="mt-3 ml-2">{{$post->user->username}}</h5></a>
 
                     </div>
 

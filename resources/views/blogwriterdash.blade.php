@@ -10,13 +10,16 @@
                         <div class="p-6 bg-white border-b border-gray-400 d-flex">
 
                             <div class="col-sm-4">
-                                <img src="{{ Auth::user()->profile->profileImage()}}" style="width:100%"
-                                    class="w-100 rounded-circle">
+                                <img src="{{ Auth::user()->profile->profileImage()}}" style="width:60%"
+                                    class="w-60 rounded-circle">
                             </div>
                             <div class="col-sm-8">
                                 <div class="d-flex justify-content-between align-items-baseline">
                                     <div class="d-flex align-items-center pb-4">
                                         <h1 class="font-semibold text-xl text-gray-800">{{ Auth::user()->username}}</h1>
+
+                                        <!-- <follow-button></follow-button> -->
+
                                     </div>
                                     <a href="/p/create" class="btn btn-primary">Add new Post</a>
                                 </div>
@@ -24,8 +27,8 @@
                                 <a href="/dashboard/{{Auth::user()->id}}/edit">Edit Profile</a>
                                 <div class="d-flex">
                                     <div> <strong>{{Auth::user()->posts()->count()}}</strong> Blogs</div>
-                                    <div><strong>500</strong> Followers</div>
-                                    <div><strong>400</strong> Following</div>
+                                    <div><strong class="ml-4">{{Auth::user()->profile->followers->count() }}</strong> Followers</div>
+                                    <div><strong class="ml-4">{{ Auth::user()->following->count()}}</strong> Following</div>
                                 </div>
 
                                 <div class="pt-4 font-wieght-bold">{{ Auth::user()->profile->title }}</div>
@@ -142,32 +145,6 @@
         </div>
     </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-    $('body').on('keyup', '#search-user', function() {
-        var searchQuest = $(this).val();
-        $.ajax({
-            method: 'POST',
-            url: '{{route("searchusers")}}',
-            dataType: 'json',
-            data: {
-                '_token': '{{ csrf_token() }}',
-                searchQuest: searchQuest
-            },
-            success: function(res) {
-                console.log(res)
-                var filterData = ''
-                $('.dynamic-container').html('');
-                $.each(res, function(index, value) {
-                    filterData = ' <a href="/profile/{{$blogwriter->id}"><h5>' + value
-                        .username + '</h5></a>'
-                    $('.dynamic-container').append(filterData);
-                });
-
-            }
-        });
-    });
-    </script>
+   
 
 </x-app-layout>

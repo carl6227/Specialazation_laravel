@@ -18,8 +18,8 @@ Route::get('/', function () {
 });
 
 
-
-Route::group(['middleware'=>['auth']],function(){
+   Route::post('/follow/{user}', 'App\Http\Controllers\FollowController@store');
+   Route::group(['middleware'=>['auth']],function(){
     Route::post('/p','App\Http\Controllers\PostsController@store');
     Route::get('/p/create','App\Http\Controllers\PostsController@create')->name('posts');
     Route::get('/p/{post}','App\Http\Controllers\PostsController@show');
