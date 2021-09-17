@@ -20,9 +20,15 @@ class DashboardController extends Controller
       $PendingPost = DB::table('posts')->where([['isApproved','false'],['user_id',"$userID"]])->paginate(2);
       $ApprovedPost = DB::table('posts')->where([['isApproved','true'],['user_id',"$userID"]])->paginate(2);
       $blogwriters = DB::table('users')->where([['username','!=','Admin'],['id','!=',Auth::user()->id]])->get();
+
+      $users = Auth::user()->following()->pluck('profiles.user_id');
+
+      $followingPosts = Post::whereIn('user_id', $users)->latest()->paginate();
       
    
-      return view('blogwriterdash',['approvedPosts'=>$ApprovedPost,'pendingPosts'=>$PendingPost,'blogwriters'=>$blogwriters]);
+      
+   
+      return view('blogwriterdash',['approvedPosts'=>$ApprovedPost,'pendingPosts'=>$PendingPost,'blogwriters'=>$blogwriters,'followingPosts'=>$followingPosts]);
      
      
     }elseif(Auth::user()->hasRole('admin')){

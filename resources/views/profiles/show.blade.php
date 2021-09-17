@@ -25,10 +25,7 @@
                             <div><strong class="ml-4">{{ $user->following->count() }}</strong> Following</div>
                         </div>
 
-                        <div class="pt-4 font-wieght-bold">{{ $user->profile->title }}</div>
-                        <div>{{$user->profile->description }}</div>
-                        <div><a href="#" style="color: #17a2b8;">{{ $user->profile->url}}</a></div>
-
+                     
                     </div> <!-- endDiv for row1 -->
 
                 </div>
