@@ -5,22 +5,15 @@
                 <div class="p-6 bg-white border-b border-gray-400 d-flex">
 
                     <div class="col-sm-4">
-                        <img src="{{$user->profile->profileImage()}}" style="width:100%"
-                            class="w-100 rounded-circle">
+                        <img src="{{$user->profile->profileImage()}}" style="width:50%"
+                            class="w-70 rounded-circle">
                     </div>
                     <div class="col-sm-8">
                         <div class="d-flex justify-content-between align-items-baseline">
                             <div class="d-flex align-items-center pb-4">
                                 <h1 class="text-xl ">{{$user->username}}</h1>
-                                <button class="btn btn-info follow"  data-id="{{ $user->id }}">
-                                    <strong>
-                                          @if($user->isFollowing($user))
-                                              UnFollow
-                                          @else
-                                              Follow
-                                          @endif
-                                        </strong>
-                                      </button>
+                                <!-- <a href="#" class="btn btn-primary ml-3">Follow</a> -->
+                                <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
                             </div>
                           
                         </div>
@@ -28,8 +21,8 @@
                        
                         <div class="d-flex">
                              <div> <strong>{{$user->posts()->count()}}</strong> Blogs</div> 
-                            <div><strong>500</strong> Followers</div>
-                            <div><strong>400</strong> Following</div>
+                            <div><strong class="ml-4">{{ $user->profile->followers->count() }}</strong> Followers</div>
+                            <div><strong class="ml-4">{{ $user->following->count() }}</strong> Following</div>
                         </div>
 
                         <div class="pt-4 font-wieght-bold">{{ $user->profile->title }}</div>

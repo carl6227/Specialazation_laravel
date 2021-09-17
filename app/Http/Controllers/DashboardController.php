@@ -35,6 +35,11 @@ class DashboardController extends Controller
     {
       return view('auth/login');
     }
+
+    
+
+    
+    
   }
   public function destroy($id){
     $user = User::findOrFail($id);
@@ -42,6 +47,7 @@ class DashboardController extends Controller
     return redirect('/dashboard');
     }
   
+
 
   public function edit(User $user)
   {
