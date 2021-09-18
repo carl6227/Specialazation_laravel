@@ -24,7 +24,7 @@
                                                 {{ method_field('DELETE') }}
                                                 <button class="btn btn-danger" type="submit">Delete</button>
                                             </form>
-                           
+                                            
                         </div>
                     </div>
                          <hr class="mt-2">

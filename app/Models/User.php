@@ -16,7 +16,7 @@ class User extends Authenticatable
     // https://www.codecheef.org/article/laravel-58-follow-unfollow-system-example-from-scratch
     use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
-  
+   
     /**
      * The attributes that are mass assignable.
      *

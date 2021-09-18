@@ -13,7 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-        "overtrue/laravel-follow": "^3.0",
+        "overtrue/laravel-follow": "dev-master",
         "santigarcor/laratrust": "^6.3"
     },
     "require-dev": {

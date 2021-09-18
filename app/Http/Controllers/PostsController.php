@@ -58,7 +58,7 @@ class PostsController extends Controller
        
     $post->update(['isApproved'=>'true']);
      
-    return redirect('/dashboard');
+    return redirect('/posts.show');
     }
 
     public function destroy($id){
