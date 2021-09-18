@@ -247,7 +247,7 @@
                     <div class="mt-3 dynamic-container">
                         @foreach ($blogwriters as $blogwriter)
                             <div class="d-flex">
-                                <a href="/profile/{{ $blogwriter->id }}">
+                                <a href="/profile/{{$blogwriter->id}}">
                                     <h5>{{ $blogwriter->username }}</h5>
                                 </a>
                             </div>

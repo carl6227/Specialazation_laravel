@@ -15,18 +15,22 @@ use App\Http\Controllers\PostsController;
 
 
 
+   
+Route::get('/', function(){
+      return view('welcome');
+}); 
 
-   Route::post('/follow/{user}', 'App\Http\Controllers\FollowController@store');
 
-   Route::get('/', 'App\Http\Controllers\PostsController@index');
-
-   Route::group(['middleware'=>['auth']],function(){
+Route::post('/follow/{user}', 'App\Http\Controllers\FollowController@store');
+Route::group(['middleware'=>['auth']],function(){
    Route::post('/p','App\Http\Controllers\PostsController@store');
    Route::get('/p/create','App\Http\Controllers\PostsController@create')->name('posts');
    Route::get('/p/edit/{post}','App\Http\Controllers\PostsController@edit');
+   Route::get('/p/{post}/edit','App\Http\Controllers\PostsController@editinfo');
+   Route::patch('/p/update/{post}','App\Http\Controllers\PostsController@update')->name('post.update');
    
    Route::get('/p/{post}','App\Http\Controllers\PostsController@show');
-   Route::delete('/p/delete/{id}','App\Http\Controllers\PostsController@destroy')->name('post.destroy');
+   Route::delete('/p/delete/{user}','App\Http\Controllers\PostsController@destroy')->name('post.destroy');
  });
    Route::group(['middleware'=>['auth']],function(){
    Route::get('/dashboard','App\Http\Controllers\DashboardController@index')->name('dashboard');

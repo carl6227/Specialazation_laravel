@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-sm-4">
                         <form method="POST" action="{{ route('post.destroy', [$post->id]) }}">
-                        <button class="btn btn-info">edit</button>
+                        <a type="button" href="/p/{{$post->id}}/edit"class="btn btn-info">edit</a>
                       
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}

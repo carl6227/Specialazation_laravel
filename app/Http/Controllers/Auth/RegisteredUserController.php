@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
-        $user->attachRole('admin');
+        $user->attachRole('blogwriter');
         event(new Registered($user));
 
         Auth::login($user);

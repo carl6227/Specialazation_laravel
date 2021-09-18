@@ -69,14 +69,15 @@
                                             
                                         </td>
                                         <td>{{$post->caption}}</td>
+                                      
                                         <td> <img src="/storage/{{$post->image}}" style="width:200px" alt=""></td>
                                         <td>
-                                            <a type="button" href="/p/edit/{{$post->id}}"
-                                                class="btn btn-info">Approve</a>
+                                         
+                                            <a type="button" href="/p/edit/{{$post->id}}"class="btn btn-info">Approve</a>
 
-                                                <form method="POST" action="{{ route('post.destroy', [$post->id]) }}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
+                                                <form method="POST" action="{{route('post.destroy',[$post->id])}}">
+                                                {{csrf_field()}}
+                                                {{method_field('DELETE')}}
                                                 <button class="btn btn-danger" type="submit">Delete</button>
                                             </form>
                                         </td>

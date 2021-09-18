@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use DB;
 use App\Models\Post;
+use App\Models\Comments;
 use Intervention\Image\facades\Image;
 class DashboardController extends Controller
 {
@@ -20,10 +21,9 @@ class DashboardController extends Controller
       $PendingPost = DB::table('posts')->where([['isApproved','false'],['user_id',"$userID"]])->paginate(2);
       $ApprovedPost = DB::table('posts')->where([['isApproved','true'],['user_id',"$userID"]])->paginate(2);
       $blogwriters = DB::table('users')->where([['username','!=','Admin'],['id','!=',Auth::user()->id]])->get();
-
       $users = Auth::user()->following()->pluck('profiles.user_id');
 
-      $followingPosts = Post::whereIn('user_id', $users)->latest()->paginate();
+      $followingPosts = Post::whereIn('user_id', $users)->latest()->paginate(2);
       
    
       
@@ -64,8 +64,6 @@ class DashboardController extends Controller
   {
    $data = request()->validate([
      'title'=>'required',
-     'description'=>'required',
-     'url'=>'url',
      'image'=>''
 
    ]);

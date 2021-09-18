@@ -38,6 +38,7 @@
                name="caption"
                autocomplete="caption"
                autofocus
+               maxlength="50000 "
                >
                {{ old('caption')}}
               </textarea>
